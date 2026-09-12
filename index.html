@@ -86,11 +86,9 @@
     min-height:88vh;
     display:flex;align-items:center;
   }
-  /* Background video — put your video file at assets/hero-bg.mp4 (and an optional poster at assets/hero-poster.jpg) */
   .hero-video{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
   }
-  /* Light fade on the left (behind the text) fading to fully clear video on the right */
   .hero-overlay{
     position:absolute;inset:0;z-index:1;
     background:linear-gradient(90deg,
@@ -101,7 +99,6 @@
       rgba(255,255,255,0) 78%);
   }
   @media (max-width:900px){
-    /* Text spans full width on mobile, so fade top-to-bottom instead of left-to-right */
     .hero-overlay{
       background:linear-gradient(180deg,
         rgba(255,255,255,0.95) 0%,
@@ -139,6 +136,7 @@
     border:none;cursor:pointer;font-size:15px;
   }
   .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(27,95,224,0.35);}
+  .btn-primary:disabled{opacity:.65;cursor:not-allowed;transform:none;}
   .btn-ghost{
     border:1px solid var(--line);background:rgba(255,255,255,0.7);color:var(--ink);font-weight:600;padding:14px 26px;border-radius:100px;
     transition:background .2s ease, border-color .2s ease;font-size:15px;
@@ -159,8 +157,6 @@
     color:var(--ink);letter-spacing:0.02em;
     white-space:nowrap;
   }
-
-  /* ---------- HERO STATS ---------- */
 
   /* ---------- SERVICE AREA / SERVICE LINE TICKERS ---------- */
   .ticker-band{
@@ -398,6 +394,11 @@
     font-size:15px;cursor:pointer;transition:background .2s ease, transform .2s ease;font-family:'Sora';
   }
   form.enquiry button:hover{background:var(--blue-dark);transform:translateY(-2px);}
+  form.enquiry button:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+  .form-status{margin-top:14px;font-size:13.5px;font-weight:600;display:none;padding:10px 14px;border-radius:8px;}
+  .form-status.show{display:block;}
+  .form-status.success{background:#E7F6EC;color:#1E7B3B;}
+  .form-status.error{background:#FCEAEA;color:#B8302F;}
   .wa-float{
     position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 10px 26px rgba(0,0,0,0.3);
@@ -484,7 +485,7 @@
       <p class="desc">Complete digital marketing solutions for schools, companies, shops and businesses — creative, consistent, and handled for you.</p>
     </div>
 
-    <p class="marketing-headline">🚫 Stop Losing Customers To A Poor Online Presence.</p>
+    <p class="marketing-headline"> Stop Losing Customers To A Poor Online Presence.</p>
 
     <ul class="check-list">
       <li>Social media page management</li>
@@ -567,7 +568,6 @@
     </div>
     <div class="team-grid">
 
-      <!-- Team Member 1 — update about text, email & LinkedIn link below -->
       <div class="team-card">
         <div class="team-photo">
           <img src="assets/aditya.jpeg" alt="ADITYA YADAV">
@@ -576,12 +576,11 @@
         <p class="team-about">B.Tech – Computer Science, Poornima University
 B.Tech in Computer Science from Poornima University with 2 years of experience in Web Technology & IT, specializing in innovative digital and technology solutions.</p>
         <div class="team-links">
-          <a href="mailto:REPLACE_WITH_EMAIL" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="REPLACE_WITH_LINKEDIN_URL" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
+          <a href="mailto:adityayadav8735@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="https://www.linkedin.com/in/aditya-yadav-649098228?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
         </div>
       </div>
 
-      <!-- Team Member 2 — update about text, email & LinkedIn link below -->
       <div class="team-card">
         <div class="team-photo">
           <img src="assets/parv.jpeg" alt="PARV SINGHAL">
@@ -589,8 +588,8 @@ B.Tech in Computer Science from Poornima University with 2 years of experience i
         <h3>PARV SINGHAL</h3>
         <p class="team-about">BBA from Poornima University with 2 years of experience in Digital Marketing & Finance, specializing in business growth, branding, and financial strategies.</p>
         <div class="team-links">
-          <a href="mailto:REPLACE_WITH_EMAIL" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="REPLACE_WITH_LINKEDIN_URL" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
+          <a href="mailto:parvsinghal13502@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="https://www.linkedin.com/in/parv-singhal-5122a5231?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
         </div>
       </div>
 
@@ -666,18 +665,22 @@ B.Tech in Computer Science from Poornima University with 2 years of experience i
           </a>
         </div>
         <div class="social-row">
-          <a href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
+          <a href="https://www.instagram.com/geniustechsolutions?stkn=azh3dnd1MjIxc2Ez" title="Instagram"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
           <a href="https://www.linkedin.com/in/genius-tech-solutions-766152436?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
           <a href="https://wa.me/918426898298" title="WhatsApp"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 9.2c.2-.6.5-.6.8-.6h.5c.2 0 .4 0 .6.5.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.5-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.2 1.3 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.4.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.2-4.1-.9-3.5-1.4-5.6-4.9-5.8-5.1-.2-.2-1.4-1.8-1.4-3.5s.9-2.5 1.2-2.8z" fill="currentColor"/></svg></a>
         </div>
       </div>
-      <form class="enquiry" onsubmit="return handleSubmit(event)">
-        <label>Your Name</label>
-        <input type="text" required placeholder="Enter your name">
-        <label>Phone Number</label>
-        <input type="tel" required placeholder="10-digit mobile number">
-        <label>You are a</label>
-        <select id="custTypeSelect">
+
+      <!-- Enquiry form: submits via Formspree AJAX, no page reload -->
+      <form class="enquiry" id="enquiryForm">
+        <label for="fname">Your Name</label>
+        <input type="text" id="fname" name="name" required placeholder="Enter your name">
+
+        <label for="fphone">Phone Number</label>
+        <input type="tel" id="fphone" name="phone" required placeholder="10-digit mobile number" pattern="[0-9+ ]{7,15}">
+
+        <label for="custTypeSelect">You are a</label>
+        <select id="custTypeSelect" name="customer_type">
           <option value="">Select customer type</option>
           <option>School / Coaching Institute</option>
           <option>Factory / Industry</option>
@@ -686,9 +689,15 @@ B.Tech in Computer Science from Poornima University with 2 years of experience i
           <option>Shop / Retail</option>
           <option>Home / Residential</option>
         </select>
-        <label>What do you need?</label>
-        <textarea rows="3" placeholder="Tell us briefly..."></textarea>
-        <button type="submit">Send Enquiry</button>
+
+        <label for="fmessage">What do you need?</label>
+        <textarea id="fmessage" name="message" rows="3" placeholder="Tell us briefly..."></textarea>
+
+        <!-- Honeypot field to reduce spam bots (kept hidden from real users) -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <button type="submit" id="enquirySubmitBtn">Send Enquiry</button>
+        <div class="form-status" id="formStatus"></div>
       </form>
     </div>
   </div>
@@ -718,42 +727,42 @@ const svgIcons = {
 const customerData = [
   {
     key:'schools', icon:'🎓', label:'Schools & Coaching',
-    image:'assets/school.png', // 👈 put your Schools & Coaching image URL here
+    image:'assets/school.png',
     tagline:'A complete digital ecosystem for education — from your website to biometric attendance.',
     services:['School / institute website with admissions & fee info','Student & parent portal for marks, attendance, results','Automated SMS / email notifications to parents','Complete computer lab setup','CCTV surveillance with remote mobile viewing','Biometric attendance for staff & students','Full campus networking, Wi-Fi & server setup'],
     side:'Ready to modernise your institute?'
   },
   {
     key:'factories', icon:'🏭', label:'Factories & Industries',
-    image:'assets/fac.jpg', // 👈 put your Factories & Industries image URL here
+    image:'assets/fac.jpg',
     tagline:'Reliable infrastructure plus automation that removes manual, error-prone work.',
     services:['Production & inventory dashboards','Barcode / QR code tracking systems','Visitor & asset management systems','Machine monitoring & automated reports','ERP support & integration','Factory-wide networking, servers & firewall','CCTV, backup & complete IT setup'],
     side:'Let\'s automate your shop floor.'
   },
   {
     key:'startups', icon:'🚀', label:'New Businesses',
-    image:'assets/web.png', // 👈 put your New Businesses image URL here
+    image:'assets/web.png',
     tagline:'Start with the right technology foundation instead of fixing it later.',
     services:['Business website, domain & professional email','Google Workspace setup','Laptops, desktops, printers & Wi-Fi','LAN network, firewall & CCTV','Biometric attendance & UPS backup','Data backup from day one','Customer, sales & inventory systems as you grow'],
     side:'Launching soon? Let\'s set it up right.'
   },
   {
     key:'offices', icon:'🏢', label:'Offices & Businesses',
-    image:'assets/om.png', // 👈 put your Offices & Businesses image URL here
+    image:'assets/om.png',
     tagline:'One IT partner instead of five different vendors for five different problems.',
     services:['Computer, laptop & printer setup','LAN networking, Wi-Fi & firewall','File sharing & user access management','CCTV & biometric attendance','Google Workspace & data backup','Server setup for shared storage','IT support & Annual Maintenance Contract'],
     side:'Simplify your office IT today.'
   },
   {
     key:'shops', icon:'🏪', label:'Shops & Retail',
-    image:'assets/shop.png', // 👈 put your Shops & Retail image URL here
+    image:'assets/shop.png',
     tagline:'Affordable, practical technology built for how retail actually runs.',
     services:['CCTV installation for security','Billing / POS setup','Inventory management systems','Internet, Wi-Fi & network setup','Business website & Google Business listing','Computer & printer maintenance','IT AMC for ongoing support'],
     side:'Ready to modernise your store?'
   },
   {
     key:'homes', icon:'🏠', label:'Homes',
-    image:'assets/home.png', // 👈 put your Homes image URL here
+    image:'assets/home.png',
     tagline:'Keep your home safe, connected, and running smoothly.',
     services:['CCTV & IP camera installation','Mobile remote viewing of your home','Laptop & desktop sales, setup & upgrades','Windows & software installation','Wi-Fi troubleshooting','SSD / RAM upgrades','Home data backup'],
     side:'Secure your home the smart way.'
@@ -823,12 +832,57 @@ function prefillContact(label){
   }, 400);
 }
 
-function handleSubmit(e){
+// ---------- Enquiry form: send directly to a Google Sheet ----------
+// No third-party service — this posts to a Google Apps Script Web App
+// tied to your own Google Sheet.
+// STEP: Replace the URL below with your deployed /exec Web App URL.
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzv8f9L6RSpHOkppSvrRbITevHyxOh4c0rv0h4NIDN8mDDrHielVeJ-gEfbi6oMklFTaA/exec";
+
+const enquiryForm = document.getElementById('enquiryForm');
+const formStatus = document.getElementById('formStatus');
+const submitBtn = document.getElementById('enquirySubmitBtn');
+
+enquiryForm.addEventListener('submit', async function(e){
   e.preventDefault();
-  alert('Thanks! Your enquiry has been noted. We\'ll get back to you shortly.\n\n(Connect this form to email/WhatsApp for live submissions.)');
-  e.target.reset();
-  return false;
-}
+
+  formStatus.className = 'form-status';
+  formStatus.textContent = '';
+
+  if(FORM_ENDPOINT.includes('PASTE_YOUR_GOOGLE_APPS_SCRIPT')){
+    formStatus.textContent = 'Form is not connected yet — add your Google Apps Script URL in the code.';
+    formStatus.classList.add('error','show');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  try{
+    const formData = new FormData(enquiryForm);
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await response.json().catch(()=>null);
+
+    if(response.ok && data && data.success){
+      formStatus.textContent = "Thanks! Your enquiry has been recorded. We'll get back to you shortly.";
+      formStatus.classList.add('success','show');
+      enquiryForm.reset();
+    } else {
+      const msg = (data && data.message) || 'Something went wrong. Please try again or WhatsApp us directly.';
+      formStatus.textContent = msg;
+      formStatus.classList.add('error','show');
+    }
+  } catch(err){
+    formStatus.textContent = 'Could not send. Please check your connection or WhatsApp us directly.';
+    formStatus.classList.add('error','show');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Enquiry';
+  }
+});
 
 // ---------- Ticker content ----------
 const serviceLine = ['Computers','IT Infrastructure','Networking','CCTV','Software','Automation','Websites','Digital Marketing','Servers','Backup','AMC'];
@@ -852,7 +906,7 @@ tickerServicesEl.innerHTML = tickerServicesHTML + tickerServicesHTML;
   const dots = Array.from(dotsWrap.children);
 
   function cardStep(){
-    return cards[0].getBoundingClientRect().width + 22; // width + gap
+    return cards[0].getBoundingClientRect().width + 22;
   }
   function scrollToCard(i){
     track.scrollTo({ left: cardStep()*i, behavior:'smooth' });
@@ -866,7 +920,6 @@ tickerServicesEl.innerHTML = tickerServicesHTML + tickerServicesHTML;
   track.addEventListener('scroll', ()=>{ window.requestAnimationFrame(updateDots); });
   updateDots();
 
-  // gentle autoplay, pauses on user interaction
   let autoplay = setInterval(()=>{
     const maxScroll = track.scrollWidth - track.clientWidth;
     if(track.scrollLeft >= maxScroll - 4){ track.scrollTo({left:0, behavior:'smooth'}); }
