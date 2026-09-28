@@ -169,8 +169,9 @@ header.scrolled .logo-img{height:38px;}
 .service-card{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
   transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
-  position:relative;
+  position:relative;cursor:pointer;
 }
+.service-card:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
 .service-card:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 24px 50px rgba(10,27,51,0.12);}
 .service-img{aspect-ratio:16/11;overflow:hidden;background:var(--tint);position:relative;}
 .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
@@ -189,6 +190,51 @@ header.scrolled .logo-img{height:38px;}
   display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease),background .35s ease,border-color .35s ease;
 }
 .service-card:hover .service-arrow{transform:translateX(6px);background:var(--blue);border-color:var(--blue);color:#fff;}
+
+/* ---------- SERVICE POPUP ---------- */
+.svc-overlay{
+  position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(8,19,38,0.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s;
+}
+.svc-overlay.open{opacity:1;visibility:visible;}
+.svc-modal{
+  position:relative;background:#fff;width:100%;max-width:880px;max-height:90vh;overflow-y:auto;
+  border-radius:28px;box-shadow:0 40px 100px rgba(0,0,0,0.4);
+  transform:translateY(60px) scale(.92);opacity:0;
+  transition:transform .6s var(--ease),opacity .5s var(--ease);
+}
+.svc-overlay.open .svc-modal{transform:translateY(0) scale(1);opacity:1;}
+.svc-close{
+  position:absolute;top:16px;right:16px;z-index:5;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(255,255,255,0.92);color:var(--ink);font-size:22px;line-height:1;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);transition:transform .35s var(--ease),background .3s,color .3s;
+}
+.svc-close:hover{background:var(--blue);color:#fff;transform:rotate(90deg);}
+.svc-hero{position:relative;height:260px;overflow:hidden;border-radius:28px 28px 0 0;background:var(--tint);}
+.svc-hero img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.2s var(--ease);}
+.svc-overlay.open .svc-hero img{transform:scale(1);}
+.svc-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,27,51,0.75));}
+.svc-hero-text{position:absolute;left:36px;bottom:26px;right:36px;z-index:2;color:#fff;}
+.svc-hero-text .num{font-family:'Sora';font-weight:700;font-size:13px;letter-spacing:.08em;opacity:.85;}
+.svc-hero-text h3{color:#fff;font-size:clamp(26px,4vw,36px);margin-top:6px;}
+.svc-body{padding:34px 36px 38px;}
+.svc-intro{font-size:17px;color:var(--muted);max-width:680px;margin:0;}
+.svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:30px;}
+@media (max-width:700px){ .svc-cols{grid-template-columns:1fr;} .svc-body{padding:26px 22px 30px;} .svc-hero{height:200px;} .svc-hero-text{left:22px;} }
+.svc-cols h4{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:14px;}
+.svc-list li{
+  position:relative;padding:11px 0 11px 34px;border-bottom:1px solid var(--line);font-size:15px;color:var(--text);
+  opacity:0;transform:translateX(-18px);transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.svc-list li::before{
+  content:'✓';position:absolute;left:0;top:10px;width:22px;height:22px;border-radius:50%;background:var(--blue-soft);
+  color:var(--blue);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.svc-overlay.open .svc-list li{opacity:1;transform:translateX(0);}
+.svc-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+.svc-tags span{background:var(--tint);border:1px solid var(--line);padding:8px 16px;border-radius:100px;font-size:13.5px;font-weight:600;color:var(--ink);}
+.svc-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;}
 
 /* ---------- WHY ---------- */
 .why{background:var(--tint);}
@@ -559,6 +605,29 @@ footer{background:#08152A;color:#8BA1C7;padding:44px 0;font-size:14px;}
   </div>
 </footer>
 
+<!-- SERVICE DETAIL POPUP -->
+<div class="svc-overlay" id="svcOverlay" aria-hidden="true">
+  <div class="svc-modal" role="dialog" aria-modal="true" aria-labelledby="svcTitle">
+    <button class="svc-close" id="svcClose" aria-label="Close">×</button>
+    <div class="svc-hero">
+      <img id="svcImg" src="" alt="">
+      <div class="svc-hero-text"><div class="num" id="svcNum"></div><h3 id="svcTitle"></h3></div>
+    </div>
+    <div class="svc-body">
+      <p class="svc-intro" id="svcIntro"></p>
+      <div class="svc-cols">
+        <div><h4>What we offer</h4><ul class="svc-list" id="svcOffer"></ul></div>
+        <div><h4>Why it helps you</h4><ul class="svc-list" id="svcBenefit"></ul></div>
+      </div>
+      <div class="svc-tags" id="svcTags"></div>
+      <div class="svc-actions">
+        <a href="#contact" class="btn-primary" id="svcCta">Get a Free Quote →</a>
+        <a href="https://wa.me/918426898298" target="_blank" rel="noopener" class="btn-ghost">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // Sticky nav glass effect on scroll
 const header = document.getElementById('siteHeader');
@@ -597,6 +666,84 @@ window.addEventListener('DOMContentLoaded', ()=>{
     setTimeout(()=>el.classList.add('in'), 120 + i*140);
   });
 });
+
+// ---------- Service detail popup ----------
+const SERVICES = [
+  { intro:"A strong IT foundation keeps your business running without interruptions. We plan, install and maintain the complete technology backbone of your office, school or factory.",
+    offer:["Structured LAN cabling and network setup","Servers, storage and backup solutions","Business-grade Wi-Fi with full coverage","Firewalls and network security","Hardware supply, installation and upgrades","Ongoing IT support and monitoring"],
+    benefit:["Fewer breakdowns and less downtime","Fast, secure and stable internet for your team","Easy to scale as your business grows","One team accountable for everything"],
+    tags:["Networking","Servers","Wi-Fi","Firewall","Hardware"] },
+  { intro:"Protect your premises around the clock. We design and install complete surveillance and access systems tailored to your building, with clear live and recorded views.",
+    offer:["HD and IP CCTV camera installation","NVR / DVR setup and storage planning","Remote viewing on mobile and PC","Biometric attendance systems","Access control and door security","Maintenance, repair and upgrades"],
+    benefit:["24/7 monitoring of your property","Watch your premises from anywhere","Accurate, tamper-proof attendance records","Deterrent against theft and incidents"],
+    tags:["CCTV","NVR","Biometric","Access Control","Remote View"] },
+  { intro:"We build fast, modern websites and custom applications that turn visitors into customers and simplify how your business operates online.",
+    offer:["Responsive business websites","Custom web applications and portals","Booking and appointment systems","Admin dashboards and CRM tools","Domain, hosting and SSL setup","Ongoing updates and maintenance"],
+    benefit:["A professional online presence","Work is automated instead of manual","Works perfectly on mobile and desktop","Built to grow with your business"],
+    tags:["Websites","Web Apps","Portals","Booking","Hosting"] },
+  { intro:"Save time and reduce errors by letting software handle repetitive work. We connect your tools, build dashboards and bring practical AI into your daily operations.",
+    offer:["Workflow and process automation","Live dashboards and automated reports","AI chatbots and assistants","AI integration into existing systems","WhatsApp and email automation","Data organisation and reporting"],
+    benefit:["Hours saved every week","Fewer manual mistakes","Clear insight into business performance","Faster replies to customers"],
+    tags:["Automation","AI","Dashboards","Chatbots","Reports"] },
+  { intro:"Get noticed and get enquiries. We manage your brand online with creative content and targeted campaigns that reach the right local audience.",
+    offer:["Social media page management","Meta (Facebook and Instagram) ads","Creative posters and content design","Promotional videos and reels","Google Business profile setup","Monthly performance reports"],
+    benefit:["More visibility in your area","Consistent, professional branding","Enquiries you can measure","Content created for you, end to end"],
+    tags:["Social Media","Meta Ads","Reels","Branding","Content"] },
+  { intro:"Keep your systems healthy without hiring a full-time IT team. Our support plans give you a dedicated team on call for maintenance and quick fixes.",
+    offer:["Annual Maintenance Contracts (AMC)","Remote and on-site troubleshooting","Preventive maintenance visits","Software, antivirus and update management","Hardware repair and replacement","Priority response for AMC clients"],
+    benefit:["Predictable yearly IT cost","Problems fixed before they grow","Quick response when you need us","Complete peace of mind"],
+    tags:["AMC","Support","Maintenance","Troubleshooting","On-site"] }
+];
+
+const svcOverlay = document.getElementById('svcOverlay');
+const svcCards = document.querySelectorAll('.service-card');
+let lastFocus = null;
+
+function fillList(id, items){
+  const ul = document.getElementById(id);
+  ul.innerHTML = '';
+  items.forEach((t,i)=>{
+    const li = document.createElement('li');
+    li.textContent = t;
+    li.style.transitionDelay = (0.25 + i*0.07) + 's';
+    ul.appendChild(li);
+  });
+}
+
+function openService(i){
+  const d = SERVICES[i], card = svcCards[i];
+  document.getElementById('svcImg').src = card.querySelector('img').src;
+  document.getElementById('svcImg').alt = card.querySelector('h3').textContent;
+  document.getElementById('svcNum').textContent = card.querySelector('.service-num').textContent;
+  document.getElementById('svcTitle').textContent = card.querySelector('h3').textContent;
+  document.getElementById('svcIntro').textContent = d.intro;
+  fillList('svcOffer', d.offer);
+  fillList('svcBenefit', d.benefit);
+  document.getElementById('svcTags').innerHTML = d.tags.map(t=>'<span>'+t+'</span>').join('');
+  lastFocus = document.activeElement;
+  svcOverlay.querySelector('.svc-modal').scrollTop = 0;
+  svcOverlay.classList.add('open');
+  svcOverlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('svcClose').focus();
+}
+function closeService(){
+  svcOverlay.classList.remove('open');
+  svcOverlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  if(lastFocus) lastFocus.focus();
+}
+
+svcCards.forEach((card,i)=>{
+  card.setAttribute('tabindex','0');
+  card.setAttribute('role','button');
+  card.addEventListener('click', ()=>openService(i));
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openService(i); } });
+});
+document.getElementById('svcClose').addEventListener('click', closeService);
+svcOverlay.addEventListener('click', e=>{ if(e.target===svcOverlay) closeService(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && svcOverlay.classList.contains('open')) closeService(); });
+document.getElementById('svcCta').addEventListener('click', closeService);
 
 // Enquiry form -> Google Apps Script Web App (unchanged endpoint/logic)
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzv8f9L6RSpHOkppSvrRbITevHyxOh4c0rv0h4NIDN8mDDrHielVeJ-gEfbi6oMklFTaA/exec";
