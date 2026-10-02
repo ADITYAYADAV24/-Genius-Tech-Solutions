@@ -248,8 +248,8 @@ header.scrolled .logo-img{height:38px;}
 .why-card p{color:var(--muted);font-size:14.5px;}
 
 /* ---------- TEAM ---------- */
-.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
-@media (max-width:700px){ .team-grid{grid-template-columns:1fr;} }
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+@media (max-width:860px){ .team-grid{grid-template-columns:1fr;} }
 .team-card{
   background:var(--tint);border-radius:var(--radius-lg);padding:44px;display:flex;gap:28px;align-items:flex-start;
   transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .4s var(--ease);
@@ -273,6 +273,11 @@ header.scrolled .logo-img{height:38px;}
 }
 .team-links a:hover{background:var(--blue);color:#fff;transform:translateY(-3px);}
 .team-links svg{width:16px;height:16px;}
+/* 3 cards in one row (desktop): stack photo above text, centered */
+@media (min-width:861px){
+  .team-card{flex-direction:column;align-items:center;text-align:center;padding:38px 28px;gap:22px;}
+  .team-links{justify-content:center;}
+}
 
 /* ---------- CONTACT ---------- */
 .contact{background:linear-gradient(165deg,var(--ink) 0%,#081326 100%);color:#fff;position:relative;overflow:hidden;}
@@ -522,6 +527,14 @@ footer{background:#08152A;color:#8BA1C7;padding:44px 0;font-size:14px;}
           </div>
         </div>
       </div>
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/rajveer.png" alt="Rajveer Singh Solanki"></div>
+        <div>
+          <h3>Rajveer Singh Solanki</h3>
+          <p class="team-role">Digital Marketing Manager</p>
+          <p class="about">2 years of hands-on experience in digital marketing, with past work for The Ummed Haveli Hotel Jaipur, Redlines Jaipur and clients in the UAE and Hungary.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -542,10 +555,6 @@ footer{background:#08152A;color:#8BA1C7;padding:44px 0;font-size:14px;}
           <a class="info-row" href="tel:+918426898298">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 006 6l1.5-2L20 14.5V17.5a1.5 1.5 0 01-1.6 1.5A16 16 0 015 6.6 1.5 1.5 0 016.5 5" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
             <div><div class="lbl">Phone</div><div class="val">+91 84268 98298</div></div>
-          </a>
-          <a class="info-row" href="#">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="#fff" stroke-width="1.6"/></svg></div>
-            <div><div class="lbl">Service Areas</div><div class="val">Tijara · Bhiwadi · Tapukara · Alwar · Neemrana</div></div>
           </a>
         </div>
         <div class="social-row">
