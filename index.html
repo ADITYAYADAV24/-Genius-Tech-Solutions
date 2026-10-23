@@ -1,803 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Genius Tech Solutions — IT, Security &amp; Digital Growth</title>
-<link rel="icon" type="image/png" href="assets/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-32x32.png">
-<link rel="apple-touch-icon" href="assets/favicon-32x32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a2b9a" />
+<title>Aditya Yadav | Genius Tech Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
 <style>
 :root{
-  --white:#ffffff;
-  --tint:#F4F7FB;
-  --tint-2:#EEF2F8;
-  --ink:#0A1B33;
-  --text:#16233A;
-  --muted:#5C6A80;
-  --blue:#1B5FE0;
-  --blue-dark:#123F99;
-  --blue-soft:rgba(27,95,224,0.08);
-  --line:#E4E9F1;
-  --radius-lg:24px;
-  --radius-md:18px;
+  --navy:#0b1a5c;--blue:#1558e6;--blue-d:#0d3fa8;--muted:#5d6b86;--line:rgba(60,120,240,.22);
   --ease:cubic-bezier(.22,1,.36,1);
+  /* every size below scales with the screen height so the whole card fits one screen */
+  --ph:clamp(92px,15.4dvh,150px);   /* photo */
+  --t:clamp(40px,5.8dvh,50px);      /* app tiles */
 }
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
 body{
-  margin:0;font-family:'Inter',sans-serif;color:var(--text);background:var(--white);
-  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  height:100dvh;overflow:hidden;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;background:#e6edfa;color:var(--navy);display:flex;justify-content:center;align-items:center;
 }
-h1,h2,h3,h4{font-family:'Sora',sans-serif;color:var(--ink);margin:0;line-height:1.12;letter-spacing:-0.01em;}
-a{color:inherit;text-decoration:none;}
-ul{margin:0;padding:0;list-style:none;}
-img{max-width:100%;display:block;}
-button{font-family:inherit;}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-section{padding:120px 0;}
-@media (max-width:900px){ section{padding:88px 0;} }
-@media (max-width:560px){ section{padding:68px 0;} .wrap{padding:0 22px;} }
+a{color:inherit;text-decoration:none}
 
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+.card{
+  width:100%;max-width:430px;height:100dvh;position:relative;overflow:hidden;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#fbfdff 0%,#f4f8ff 55%,#e9f1ff 100%);animation:fade .5s var(--ease) both;
 }
+@keyframes fade{from{opacity:0}to{opacity:1}}
 
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
-.reveal.in{opacity:1;transform:translateY(0);}
-.reveal-stagger.in > *{opacity:1;transform:translateY(0);}
-.reveal-stagger > *{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
-.reveal-stagger.in > *:nth-child(1){transition-delay:.05s;}
-.reveal-stagger.in > *:nth-child(2){transition-delay:.14s;}
-.reveal-stagger.in > *:nth-child(3){transition-delay:.23s;}
-.reveal-stagger.in > *:nth-child(4){transition-delay:.32s;}
-.reveal-stagger.in > *:nth-child(5){transition-delay:.41s;}
-.reveal-stagger.in > *:nth-child(6){transition-delay:.5s;}
+/* ===== HERO ===== */
+.hero{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;padding:calc(clamp(8px,1.6dvh,14px) + env(safe-area-inset-top)) 20px 0}
+.dome{
+  position:absolute;top:0;left:-10%;width:120%;height:calc(100% - var(--ph) * .24);overflow:hidden;
+  border-radius:0 0 50% 50% / 0 0 55% 55%;background:#20242b;
+}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.dome::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.10))}
+.hero>*:not(.dome){position:relative;z-index:1}
 
-/* ---------- NAV ---------- */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:16px 0;transition:padding .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
-}
-header.scrolled{
-  padding:10px 0;background:rgba(255,255,255,0.75);backdrop-filter:blur(16px) saturate(180%);
-  -webkit-backdrop-filter:blur(16px) saturate(180%);box-shadow:0 1px 0 var(--line),0 12px 30px rgba(10,27,51,0.06);
-}
-nav.wrap{
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
-}
-.logo{display:flex;align-items:center;gap:10px;flex-shrink:0;padding:4px 0;}
-.logo-img{height:46px;width:auto;display:block;transition:height .4s var(--ease);}
-header.scrolled .logo-img{height:38px;}
-.navlinks{
-  display:flex;gap:4px;font-size:15px;font-weight:600;color:var(--muted);
-  flex:1;justify-content:center;
-}
-.navlinks a{padding:9px 16px;border-radius:100px;transition:color .25s ease,background .25s ease;}
-.navlinks a:hover{color:var(--ink);background:var(--tint);}
-.nav-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
-.nav-cta{
-  background:var(--ink);color:#fff;padding:12px 24px;border-radius:100px;font-weight:600;font-size:14.5px;
-  transition:transform .3s var(--ease),background .3s ease;white-space:nowrap;
-}
-.nav-cta:hover{background:var(--blue);transform:translateY(-2px);}
-.navtoggle{display:none;background:none;border:none;cursor:pointer;padding:6px;position:relative;z-index:120;width:34px;height:34px;flex-shrink:0;}
-.navtoggle span{display:block;width:24px;height:2px;background:var(--ink);margin:6px 0;transition:transform .35s var(--ease),opacity .35s var(--ease);}
-.navtoggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
-.navtoggle.open span:nth-child(2){opacity:0;}
-.navtoggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+.logo-chip{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;padding:5px 14px;box-shadow:0 8px 22px rgba(4,20,90,.30)}
+.logo{display:block;height:clamp(28px,4.9dvh,44px);width:auto;max-width:200px;object-fit:contain}
+.logo-text{display:none;font-weight:800;font-size:.95rem;color:var(--navy);padding:6px 0}
+.tagline{text-shadow:0 1px 6px rgba(0,0,0,.55);display:flex;align-items:center;gap:9px;margin-top:clamp(5px,1dvh,9px);color:#fff;font-size:clamp(10.5px,3.2vw,13px);font-weight:500;white-space:nowrap}
+.tagline::before,.tagline::after{content:"";width:22px;height:1px;background:rgba(255,255,255,.6)}
 
-.mobile-menu{
-  position:fixed;inset:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);z-index:110;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-  opacity:0;visibility:hidden;transform:translateY(-16px);transition:opacity .4s var(--ease),transform .4s var(--ease),visibility .4s;
-}
-.mobile-menu.open{opacity:1;visibility:visible;transform:translateY(0);}
-.mobile-menu a{font-family:'Sora';font-size:28px;font-weight:700;color:var(--ink);padding:14px 0;}
-.mobile-menu .nav-cta{margin-top:20px;}
+.photo-wrap{position:relative;margin-top:clamp(6px,1.2dvh,12px);width:var(--ph);height:var(--ph)}
+.photo{width:100%;height:100%;padding:4px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #2a7bf5,0 12px 26px rgba(10,45,150,.38)}
+.photo img,.mono{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.mono{display:none;place-items:center;background:var(--navy);color:#fff;font-weight:800;font-size:2rem}
+.verified{position:absolute;right:2px;bottom:5px;width:24px;height:24px;border-radius:50%;background:#1f6fef;border:3px solid #fff;display:grid;place-items:center;box-shadow:0 4px 10px rgba(20,80,220,.4)}
+.verified svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
 
-@media (max-width:860px){ .navlinks{display:none;} .navtoggle{display:block;} }
+/* ===== IDENTITY ===== */
+.id{flex:none;text-align:center;padding:clamp(6px,1.2dvh,12px) 20px 0}
+h1{font-size:clamp(1.35rem,3.5dvh,1.85rem);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.title{margin-top:2px;font-size:clamp(.82rem,1.9dvh,.95rem);font-weight:500;color:var(--muted)}
+.company{margin-top:2px;font-size:clamp(.88rem,2dvh,1rem);font-weight:700;color:var(--blue)}
+.bar{width:38px;height:3px;border-radius:3px;margin:clamp(5px,1dvh,9px) auto 0;background:linear-gradient(90deg,#1f6fef,#3ec6f0)}
 
-/* ---------- HERO ---------- */
-.hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding-top:90px;
-  background:#F6F9FF;
-}
-.hero-video-bg{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:80% center;z-index:0;
-}
-.hero-overlay{
-  position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,
-    rgba(246,249,255,0.99) 0%,
-    rgba(246,249,255,0.96) 32%,
-    rgba(246,249,255,0.8) 48%,
-    rgba(246,249,255,0.32) 65%,
-    rgba(246,249,255,0.06) 82%,
-    rgba(246,249,255,0) 100%);
-}
-@media (max-width:900px){
-  .hero-video-bg{object-position:60% center;}
-  .hero-overlay{
-    background:linear-gradient(180deg,
-      rgba(246,249,255,0.97) 0%,
-      rgba(246,249,255,0.93) 50%,
-      rgba(246,249,255,0.72) 78%,
-      rgba(246,249,255,0.35) 100%);
-  }
-}
-.hero-inner{max-width:1180px;margin:0 auto;padding:0 32px;width:100%;position:relative;z-index:2;}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:9px;background:var(--blue-soft);border:1px solid rgba(27,95,224,0.16);
-  padding:8px 18px 8px 14px;border-radius:100px;font-size:13.5px;font-weight:600;color:var(--blue-dark);margin-bottom:28px;
-}
-.hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(27,95,224,.45);}70%{box-shadow:0 0 0 9px rgba(27,95,224,0);}100%{box-shadow:0 0 0 0 rgba(27,95,224,0);}}
-.hero h1{font-size:clamp(38px,6.4vw,74px);font-weight:800;max-width:640px;letter-spacing:-0.02em;}
-.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--blue) 20%,#3FC5E8 80%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.hero p.sub{color:var(--muted);font-size:19px;max-width:480px;margin-top:26px;}
-.hero-ctas{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
-.btn-primary{
-  background:var(--ink);color:#fff;font-weight:600;padding:16px 30px;border-radius:100px;
-  display:inline-flex;align-items:center;gap:9px;transition:transform .35s var(--ease),background .35s ease,box-shadow .35s ease;
-  border:none;cursor:pointer;font-size:15.5px;box-shadow:0 14px 30px rgba(10,27,51,0.16);
-}
-.btn-primary:hover{background:var(--blue);transform:translateY(-3px);box-shadow:0 18px 36px rgba(27,95,224,0.3);}
-.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none;}
-.btn-ghost{
-  border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:600;padding:15px 28px;border-radius:100px;
-  transition:border-color .3s ease,transform .3s var(--ease);font-size:15.5px;
-}
-.btn-ghost:hover{border-color:var(--blue);transform:translateY(-3px);}
-@media (max-width:640px){ .hero{padding-top:78px;min-height:92vh;} .hero-ctas{margin-bottom:40px;} }
+/* ===== APP TILES ===== */
+.apps{flex:none;display:grid;grid-template-columns:repeat(4,var(--t));justify-content:center;gap:clamp(16px,3dvh,28px) clamp(22px,8vw,36px);padding:clamp(10px,2dvh,20px) 20px 0}
+.app{width:var(--t);height:var(--t);border-radius:30%;display:grid;place-items:center;color:#fff;border:0;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 7px 14px var(--sh,rgba(20,60,160,.25));transition:transform .2s var(--ease),filter .2s}
+.app svg{width:50%;height:50%;fill:currentColor}
+.app:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.app:active{transform:scale(.94)}
+.a-li{background:linear-gradient(150deg,#1a84dc,#0a5ab0);--sh:rgba(10,90,176,.3)}
+.a-wa{background:linear-gradient(150deg,#35e272,#12a44b);--sh:rgba(18,164,75,.3)}
+.a-em{background:linear-gradient(150deg,#3592ff,#0f62e0);--sh:rgba(15,98,224,.3)}
+.a-web{background:linear-gradient(150deg,#9068f2,#5a35d0);--sh:rgba(90,53,208,.3)}
+.a-ct{background:linear-gradient(150deg,#ffb83a,#f0750f);--sh:rgba(240,117,15,.3)}
+.a-sh{background:linear-gradient(150deg,#2a2a2e,#000);--sh:rgba(0,0,0,.3)}
+.a-ig{background:linear-gradient(45deg,#fdb548,#f5365c 55%,#a22fd1);--sh:rgba(220,50,110,.28)}
+.a-call{background:linear-gradient(150deg,#22c7b0,#0b8f86);--sh:rgba(11,143,134,.3)}
 
-/* ---------- SECTION HEADS ---------- */
-.sec-head{max-width:640px;margin-bottom:56px;}
-.sec-head .kicker{color:var(--blue);font-weight:600;font-size:14.5px;margin-bottom:12px;}
-.sec-head h2{font-size:clamp(28px,3.6vw,42px);}
-.sec-head p.desc{color:var(--muted);margin-top:16px;font-size:17px;}
+/* ===== SERVICES: fills whatever height is left ===== */
+.services{flex:1;min-height:0;display:flex;flex-direction:column;padding:clamp(10px,2.2dvh,22px) 18px 0}
+.sv-head{flex:none;display:flex;align-items:flex-end;gap:10px;margin-bottom:clamp(6px,1.2dvh,11px);position:relative;padding-top:9px}
+.sv-head::before{content:"";position:absolute;left:0;top:0;width:24px;height:4px;border-radius:4px;background:linear-gradient(90deg,#1f6fef,#3ec6f0)}
+.sv-head h2{font-size:clamp(1.12rem,2.9dvh,1.38rem);font-weight:800;letter-spacing:-.02em;white-space:nowrap;line-height:1.1}
+.sv-head i{flex:1;height:1px;background:var(--line);margin-bottom:6px;min-width:8px}
+.sv-head em{font-size:.68rem;font-weight:500;color:var(--muted);white-space:nowrap;margin-bottom:2px}
+.sv-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,128px));align-content:space-evenly;gap:12px 11px}
+.sv{container:sv/size;position:relative;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:8px 8px 7px;border-radius:14px;
+  border:1px solid var(--line);background:linear-gradient(135deg,#fff 45%,rgba(190,218,255,.35));box-shadow:0 5px 14px rgba(30,80,200,.07);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.sv:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(30,80,200,.13)}
+.sv:active{transform:scale(.97)}
+.sv-ico{flex:none;width:clamp(22px,3.3dvh,28px);height:clamp(22px,3.3dvh,28px);border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 5px 10px rgba(20,60,160,.2)}
+.sv-ico svg{width:55%;height:55%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.g1{background:linear-gradient(150deg,#2b9bff,#0b5ed7)}.g2{background:linear-gradient(150deg,#2fd48a,#0f9b63)}.g3{background:linear-gradient(150deg,#8b6cf5,#5b3fd0)}
+.g4{background:linear-gradient(150deg,#ffb43a,#f2760f)}.g5{background:linear-gradient(150deg,#ff5aa0,#d6126a)}.g6{background:linear-gradient(150deg,#26c6c6,#0a8f9a)}
+.sv h3{margin-top:clamp(7px,1.3dvh,11px);font-size:clamp(.68rem,1.5dvh,.75rem);font-weight:700;line-height:1.2}
+.sv p{display:none;margin-top:3px;font-size:clamp(.58rem,1.25dvh,.64rem);font-weight:500;line-height:1.3;color:var(--muted);padding-right:4px}
+.go{position:absolute;right:6px;bottom:6px;width:18px;height:18px;border-radius:50%;background:#e4eeff;display:grid;place-items:center;color:var(--blue)}
+.go svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 
-/* ---------- SERVICES ---------- */
-.services{background:var(--white);}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-@media (max-width:900px){ .service-grid{grid-template-columns:repeat(2,1fr);} }
-@media (max-width:600px){ .service-grid{grid-template-columns:1fr;} }
-.service-card{
-  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
-  position:relative;cursor:pointer;
-}
-.service-card:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
-.service-card:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 24px 50px rgba(10,27,51,0.12);}
-.service-img{aspect-ratio:16/11;overflow:hidden;background:var(--tint);position:relative;}
-.service-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
-.service-card:hover .service-img img{transform:scale(1.07);}
-.service-img::after{
-  content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(27,95,224,0.14),transparent 55%);
-  opacity:0;transition:opacity .4s var(--ease);
-}
-.service-card:hover .service-img::after{opacity:1;}
-.service-body{padding:26px 26px 30px;}
-.service-num{font-family:'Sora';font-weight:700;font-size:13px;color:var(--muted);letter-spacing:.04em;}
-.service-card h3{font-size:20px;margin:14px 0 10px;}
-.service-card p{color:var(--muted);font-size:15px;}
-.service-arrow{
-  margin-top:20px;width:38px;height:38px;border-radius:50%;background:var(--tint);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease),background .35s ease,border-color .35s ease;
-}
-.service-card:hover .service-arrow{transform:translateX(6px);background:var(--blue);border-color:var(--blue);color:#fff;}
+/* ===== SAVE CONTACT ===== */
+.dock{flex:none;padding:clamp(8px,1.6dvh,14px) 20px max(clamp(10px,1.8dvh,16px),env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(228,238,255,0),#e1ecff 45%);display:flex;justify-content:center}
+.save{width:100%;max-width:310px;height:clamp(44px,6.2dvh,52px);border:0;border-radius:999px;color:#fff;cursor:pointer;font:inherit;font-size:1rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:14px;background:linear-gradient(180deg,#1a63e8,var(--blue-d));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 9px 20px rgba(13,63,168,.38);transition:transform .2s var(--ease),filter .2s}
+.save svg{width:22px;height:22px;fill:currentColor}
+.save .div{width:1px;height:22px;background:rgba(255,255,255,.45)}
+.save:hover{filter:brightness(1.08)}
+.save:active{transform:scale(.97)}
+.save.done{background:linear-gradient(180deg,#22b35a,#128a41)}
 
-/* ---------- SERVICE POPUP ---------- */
-.svc-overlay{
-  position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;
-  background:rgba(8,19,38,0.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s;
-}
-.svc-overlay.open{opacity:1;visibility:visible;}
-.svc-modal{
-  position:relative;background:#fff;width:100%;max-width:880px;max-height:90vh;overflow-y:auto;
-  border-radius:28px;box-shadow:0 40px 100px rgba(0,0,0,0.4);
-  transform:translateY(60px) scale(.92);opacity:0;
-  transition:transform .6s var(--ease),opacity .5s var(--ease);
-}
-.svc-overlay.open .svc-modal{transform:translateY(0) scale(1);opacity:1;}
-.svc-close{
-  position:absolute;top:16px;right:16px;z-index:5;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
-  background:rgba(255,255,255,0.92);color:var(--ink);font-size:22px;line-height:1;
-  box-shadow:0 6px 18px rgba(0,0,0,0.18);transition:transform .35s var(--ease),background .3s,color .3s;
-}
-.svc-close:hover{background:var(--blue);color:#fff;transform:rotate(90deg);}
-.svc-hero{position:relative;height:260px;overflow:hidden;border-radius:28px 28px 0 0;background:var(--tint);}
-.svc-hero img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.2s var(--ease);}
-.svc-overlay.open .svc-hero img{transform:scale(1);}
-.svc-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,27,51,0.75));}
-.svc-hero-text{position:absolute;left:36px;bottom:26px;right:36px;z-index:2;color:#fff;}
-.svc-hero-text .num{font-family:'Sora';font-weight:700;font-size:13px;letter-spacing:.08em;opacity:.85;}
-.svc-hero-text h3{color:#fff;font-size:clamp(26px,4vw,36px);margin-top:6px;}
-.svc-body{padding:34px 36px 38px;}
-.svc-intro{font-size:17px;color:var(--muted);max-width:680px;margin:0;}
-.svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:30px;}
-@media (max-width:700px){ .svc-cols{grid-template-columns:1fr;} .svc-body{padding:26px 22px 30px;} .svc-hero{height:200px;} .svc-hero-text{left:22px;} }
-.svc-cols h4{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:14px;}
-.svc-list li{
-  position:relative;padding:11px 0 11px 34px;border-bottom:1px solid var(--line);font-size:15px;color:var(--text);
-  opacity:0;transform:translateX(-18px);transition:opacity .5s var(--ease),transform .5s var(--ease);
-}
-.svc-list li::before{
-  content:'✓';position:absolute;left:0;top:10px;width:22px;height:22px;border-radius:50%;background:var(--blue-soft);
-  color:var(--blue);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
-}
-.svc-overlay.open .svc-list li{opacity:1;transform:translateX(0);}
-.svc-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
-.svc-tags span{background:var(--tint);border:1px solid var(--line);padding:8px 16px;border-radius:100px;font-size:13.5px;font-weight:600;color:var(--ink);}
-.svc-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;}
+:focus-visible{outline:3px solid #3ec6f0;outline-offset:3px}
 
-/* ---------- WHY ---------- */
-.why{background:var(--tint);}
-.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);}
-@media (max-width:900px){ .why-grid{grid-template-columns:repeat(2,1fr);} }
-@media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
-.why-card{background:#fff;padding:34px 26px;transition:background .35s ease;}
-.why-card:hover{background:var(--tint);}
-.why-num{font-family:'Sora';font-weight:800;font-size:26px;color:var(--blue);opacity:.35;margin-bottom:18px;}
-.why-card h4{font-size:16.5px;margin-bottom:8px;}
-.why-card p{color:var(--muted);font-size:14.5px;}
+.photo-wrap,.id,.app,.sv{animation:rise .5s var(--ease) both}
+.photo-wrap{animation-delay:.05s}.id{animation-delay:.1s}
+.app:nth-child(1){animation-delay:.15s}.app:nth-child(2){animation-delay:.17s}.app:nth-child(3){animation-delay:.19s}.app:nth-child(4){animation-delay:.21s}
+.app:nth-child(5){animation-delay:.23s}.app:nth-child(6){animation-delay:.25s}.app:nth-child(7){animation-delay:.27s}.app:nth-child(8){animation-delay:.29s}
+.sv:nth-child(1){animation-delay:.32s}.sv:nth-child(2){animation-delay:.35s}.sv:nth-child(3){animation-delay:.38s}.sv:nth-child(4){animation-delay:.41s}.sv:nth-child(5){animation-delay:.44s}.sv:nth-child(6){animation-delay:.47s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ---------- TEAM ---------- */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-@media (max-width:860px){ .team-grid{grid-template-columns:1fr;} }
-.team-card{
-  background:var(--tint);border-radius:var(--radius-lg);padding:44px;display:flex;gap:28px;align-items:flex-start;
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .4s var(--ease);
-}
-.team-card:hover{transform:translateY(-6px);background:#fff;box-shadow:0 24px 50px rgba(10,27,51,0.1);}
-@media (max-width:520px){ .team-card{flex-direction:column;text-align:center;align-items:center;padding:34px 26px;} }
-.team-photo{
-  width:140px;height:140px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#fff;
-  border:3px solid #fff;box-shadow:0 8px 22px rgba(10,27,51,0.12);
-  transition:box-shadow .4s var(--ease);
-}
-.team-card:hover .team-photo{box-shadow:0 0 0 4px var(--blue-soft),0 12px 28px rgba(27,95,224,0.22);}
-.team-photo img{
-  width:100%;height:100%;object-fit:cover;object-position:center 20%;
-  image-rendering:auto;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-}
-.team-card h3{font-size:19px;margin-bottom:6px;}
-.team-role{color:var(--blue);font-size:13.5px;font-weight:600;margin-bottom:12px;}
-.team-card p.about{color:var(--muted);font-size:14.5px;}
-.team-links{display:flex;gap:10px;margin-top:18px;}
-@media (max-width:520px){ .team-links{justify-content:center;} }
-.team-links a{
-  width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .3s ease,color .3s ease,transform .3s var(--ease);
-}
-.team-links a:hover{background:var(--blue);color:#fff;transform:translateY(-3px);}
-.team-links svg{width:16px;height:16px;}
-/* 3 cards in one row (desktop): stack photo above text, centered */
-@media (min-width:861px){
-  .team-card{flex-direction:column;align-items:center;text-align:center;padding:38px 28px;gap:22px;}
-  .team-links{justify-content:center;}
-}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:10px 16px;border-radius:999px;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease);z-index:6}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* ---------- CONTACT ---------- */
-.contact{background:linear-gradient(165deg,var(--ink) 0%,#081326 100%);color:#fff;position:relative;overflow:hidden;}
-.contact::before{
-  content:'';position:absolute;top:-220px;left:-120px;width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,rgba(27,95,224,0.28),transparent 70%);
-}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;position:relative;z-index:2;}
-@media (max-width:900px){ .contact-grid{grid-template-columns:1fr;gap:44px;} }
-.contact h2{color:#fff;font-size:clamp(28px,3.6vw,42px);max-width:420px;}
-.contact p.desc{color:#A9BBDA;margin-top:16px;font-size:17px;max-width:420px;}
-.contact-info{margin-top:38px;}
-.contact-info a.info-row{
-  display:flex;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid rgba(255,255,255,0.1);
-  transition:transform .3s var(--ease);
-}
-.contact-info a.info-row:hover{transform:translateX(6px);}
-.contact-info .ic{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.contact-info .ic svg{width:19px;height:19px;}
-.contact-info .lbl{font-size:12px;color:#8BA1C7;text-transform:uppercase;letter-spacing:.06em;}
-.contact-info .val{font-family:'Sora';font-weight:600;font-size:16px;}
-.social-row{display:flex;gap:12px;margin-top:28px;}
-.social-row a{
-  width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);
-  display:flex;align-items:center;justify-content:center;color:#fff;transition:background .3s ease,transform .3s var(--ease);
-}
-.social-row a:hover{background:var(--blue);transform:translateY(-3px);}
-.social-row svg{width:19px;height:19px;}
-
-form.enquiry{background:#fff;border-radius:var(--radius-lg);padding:36px;color:var(--text);box-shadow:0 30px 70px rgba(0,0,0,0.35);}
-form.enquiry label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px;margin-top:18px;}
-form.enquiry label:first-child{margin-top:0;}
-form.enquiry input, form.enquiry select, form.enquiry textarea{
-  width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-family:'Inter';font-size:14.5px;
-  transition:border-color .25s ease,box-shadow .25s ease;background:var(--tint);
-}
-form.enquiry input:focus, form.enquiry select:focus, form.enquiry textarea:focus{
-  outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(27,95,224,0.12);background:#fff;
-}
-form.enquiry button{
-  margin-top:26px;width:100%;background:var(--ink);color:#fff;font-weight:600;padding:16px;border:none;border-radius:12px;
-  font-size:15.5px;cursor:pointer;transition:background .3s ease,transform .3s var(--ease);font-family:'Sora';
-}
-form.enquiry button:hover{background:var(--blue);transform:translateY(-2px);}
-form.enquiry button:disabled{opacity:.6;cursor:not-allowed;transform:none;}
-.form-status{margin-top:16px;font-size:13.5px;font-weight:600;display:none;padding:12px 16px;border-radius:10px;}
-.form-status.show{display:block;}
-.form-status.success{background:#E7F6EC;color:#1E7B3B;}
-.form-status.error{background:#FCEAEA;color:#B8302F;}
-
-.wa-float{
-  position:fixed;bottom:26px;right:26px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(0,0,0,0.28);z-index:90;
-  transition:transform .3s var(--ease);
-}
-.wa-float:hover{transform:scale(1.08);}
-
-/* ---------- FOOTER ---------- */
-footer{background:#08152A;color:#8BA1C7;padding:44px 0;font-size:14px;}
-.footer-wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;}
-.footer-brand{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Sora';font-weight:700;font-size:15px;}
-.footer-brand img{height:28px;width:auto;border-radius:6px;}
-.footer-links{display:flex;gap:22px;flex-wrap:wrap;font-weight:500;}
-.footer-links a:hover{color:#fff;}
-.footer-bottom{margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;}
+/* Short phones: drop the one-line descriptions so nothing is cut off */
+@media (max-width:350px){.sv-head em{display:none}.apps{gap:14px 18px}}
+/* Tablet / desktop: centred phone-sized card */
+@media (min-width:600px){body{background:#e6edfa}.card{height:min(100dvh - 32px,860px);border-radius:32px;box-shadow:0 30px 70px rgba(20,50,120,.25)}}
+/* Extremely short windows: allow scrolling instead of squashing tap targets */
+@media (max-height:560px){body{height:auto;min-height:100dvh;overflow:auto;align-items:flex-start}.card{height:auto;min-height:100dvh}.sv-grid{grid-template-rows:auto auto}.sv{min-height:96px}}
+@container sv (min-height:118px) and (min-width:84px){.sv p{display:block}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<main class="card">
 
-<header id="siteHeader">
-  <nav class="wrap">
-    <a href="#" class="logo"><img src="assets/logo.png" alt="Genius Tech Solutions" class="logo-img"></a>
-    <div class="navlinks">
-      <a href="#services">Services</a>
-      <a href="#why">Why Us</a>
-      <a href="#team">Team</a>
-      <a href="#contact">Contact</a>
+  <section class="hero">
+    <div class="dome" aria-hidden="true">
+      <!-- BACKGROUND IMAGE: put your image at images/hero-bg.jpg (or change the src). Hidden automatically if the file is missing. -->
+      <img class="hero-bg" id="heroBg" src="images/hero-bg.jpg" alt="" decoding="async" />
     </div>
-    <div class="nav-right">
-      <a href="#contact" class="nav-cta">Let's Talk</a>
-      <button class="navtoggle" id="navToggle" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+
+    <div class="logo-chip">
+      <!-- LOGO: replace images/logo.png with your logo file. Falls back to text if missing. -->
+      <img class="logo" id="logo" src="images/logo.png" alt="Genius Tech Solutions" decoding="async" />
+      <span class="logo-text" id="logoText">Genius Tech Solutions</span>
     </div>
+    <p class="tagline">Technology that works for your business.</p>
+
+    <div class="photo-wrap">
+      <div class="photo">
+        <!-- PHOTO: replace images/aditya.jpeg with your photo. Falls back to initials if missing. -->
+        <img id="photo" src="images/aditya.jpeg" alt="Aditya Yadav" width="150" height="150" decoding="async" />
+        <div class="mono" id="mono" aria-hidden="true">AY</div>
+      </div>
+      <span class="verified" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    </div>
+  </section>
+
+  <div class="id">
+    <h1>Aditya Yadav</h1>
+    <p class="title">Managing Director</p>
+    <p class="company">Genius Tech Solutions</p>
+    <div class="bar" aria-hidden="true"></div>
+  </div>
+
+  <nav class="apps" aria-label="Contact and social links">
+    <a class="app a-call" href="tel:+918426898298" aria-label="Call"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg></a>
+    <a class="app a-wa" href="https://wa.me/918426898298" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5 13.6c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-5.6-4.9c-.7-.9-1.2-2-1.2-3s.5-1.5.7-1.7c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4l.8 2c.1.1 0 .3 0 .4l-.4.6c-.1.1-.2.3-.1.5.5.9 1.2 1.6 2 2.1.3.2.5.2.6 0l.7-.8c.1-.2.3-.2.5-.1l1.9.9c.2.1.3.2.3.3.1.3.1.9-.1 1.4z"/></svg></a>
+    <a class="app a-web" href="https://geniustechsolutions.in/" target="_blank" rel="noopener noreferrer" aria-label="Website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 9h-3a15.6 15.6 0 0 0-1.3-5A8 8 0 0 1 18.9 11zM12 4c.8 1 1.6 2.8 2 7h-4c.4-4.2 1.2-6 2-7zM4.1 13h3a15.6 15.6 0 0 0 1.3 5A8 8 0 0 1 4.1 13zm3-2h-3a8 8 0 0 1 4.3-5 15.6 15.6 0 0 0-1.3 5zM12 20c-.8-1-1.6-2.8-2-7h4c-.4 4.2-1.2 6-2 7zm2.6-2a15.6 15.6 0 0 0 1.3-5h3a8 8 0 0 1-4.3 5z"/></svg></a>
+    <a class="app a-em" href="mailto:adityayadav8735@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.5 7v.1L12 13l7.5-5.9V7L12 12.2z"/></svg></a>
+    <a class="app a-li" href="https://www.linkedin.com/company/genius-tech-solutions1101/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3A2 2 0 1 0 4.5 7 2 2 0 0 0 4.5 3zM3 9h3v12H3zM9 9h2.9v1.6h.1c.4-.8 1.5-1.9 3.3-1.9 3.5 0 4.2 2.3 4.2 5.3V21h-3v-6.2c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"/></svg></a>
+    <a class="app a-ig" href="https://www.instagram.com/geniustechsolutions?stkn=azh3dnd1MjIxc2Ez" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
+      <a class="app a-ct" href="https://geniustechsolutions.in/#contact" target="_blank" rel="noopener noreferrer" aria-label="Contact us"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9.5L5 21.5V18H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm3 4.5v1.8h10V7.5zm0 3.9v1.8h6.5v-1.8z"/></svg></a>
+    <button class="app a-sh" id="shareBtn" type="button" aria-label="Share this card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16a3 3 0 0 0-2.2 1l-7-3.5a3 3 0 0 0 0-3l7-3.5A3 3 0 1 0 15 5.5l-7 3.5a3 3 0 1 0 0 6l7 3.5A3 3 0 1 0 18 16z"/></svg></button>
   </nav>
-</header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#services">Services</a>
-  <a href="#why">Why Us</a>
-  <a href="#team">Team</a>
-  <a href="#contact">Contact</a>
-  <a href="#contact" class="nav-cta">Let's Talk</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-    <source src="assets/hero-bg.mp4" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-inner">
-    <h1 class="reveal">Technology that <em>works</em> for your business.</h1>
-    <p class="sub reveal">IT infrastructure, CCTV and security, websites and applications, automation and AI, and digital marketing — designed, installed and supported by one team.</p>
-    <div class="hero-ctas reveal">
-      <a href="#contact" class="btn-primary">Get a Free Consultation →</a>
-      <a href="#services" class="btn-ghost">Explore Services</a>
+  <section class="services" aria-labelledby="svTitle" id="services">
+    <div class="sv-head"><h2 id="svTitle">Our Services</h2><i aria-hidden="true"></i><em>Build &nbsp;•&nbsp; Automate &nbsp;•&nbsp; Grow</em></div>
+    <div class="sv-grid">
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <h3>IT Infrastructure</h3><p>Reliable setup for better performance.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.2 7.5 9.5 4.3-1.3 7.5-5 7.5-9.5V6L12 3z"/><rect x="9.2" y="10.8" width="5.6" height="4.4" rx="1"/><path d="M10.5 10.8V9.6a1.5 1.5 0 0 1 3 0v1.2"/></svg></div>
+        <h3>CCTV &amp; Security</h3><p>Safer spaces, smarter monitoring.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g3"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01M10 13l-2 2 2 2M14 13l2 2-2 2"/></svg></div>
+        <h3>Websites &amp; Applications</h3><p>Modern websites &amp; apps for your business.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h9M8.5 20v-4M9.8 13.6 14 9.2M16 8l3-1.5M16 9.6l3 .6"/><circle cx="8.5" cy="14.6" r="1.6"/><circle cx="14.6" cy="8.4" r="1.6"/></svg></div>
+        <h3>Automation &amp; AI</h3><p>Work smarter with technology.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g5"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.4"><path d="M6 20v-5M12 20v-9M18 20V8"/><path d="M4 9l5-4 3 2.2L18 3.5M14.5 3.5H18V7" style="stroke-width:1.8"/></svg></div>
+        <h3>Digital Marketing</h3><p>Grow your brand online.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="sv" href="https://geniustechsolutions.in/#services" target="_blank" rel="noopener noreferrer">
+        <div class="sv-ico g6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13.5" width="4.5" height="6.5" rx="2"/><rect x="17" y="13.5" width="4.5" height="6.5" rx="2"/><path d="M19.2 20c0 1.4-1.8 2-4.2 2h-1.5"/></svg></div>
+        <h3>IT Support &amp; AMC</h3><p>Always there, when you need us.</p>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
+  </section>
+
+  <div class="dock">
+    <button class="save" id="saveBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4zM5 10V7H3v3H0v2h3v3h2v-3h3v-2z"/></svg><span class="div" aria-hidden="true"></span><span id="saveTxt">Save Contact</span></button>
   </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="kicker">Our Services</p>
-      <h2>Everything your business needs to move forward.</h2>
-      <p class="desc">From the network in your building to the software your team uses every day — six core services, delivered by one partner.</p>
-    </div>
-    <div class="service-grid reveal-stagger">
-      <div class="service-card">
-        <div class="service-img"><img src="assets/it.jpg" alt="IT Infrastructure"></div>
-        <div class="service-body">
-          <div class="service-num">01</div>
-          <h3>IT Infrastructure</h3>
-          <p>Networking, servers, storage, Wi-Fi, firewalls, hardware and ongoing IT support.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-img"><img src="assets/cctv.jpg" alt="CCTV & Security"></div>
-        <div class="service-body">
-          <div class="service-num">02</div>
-          <h3>CCTV &amp; Security</h3>
-          <p>CCTV systems, NVR, surveillance, biometric attendance and complete security infrastructure.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-img"><img src="assets/web.png" alt="Websites & Applications"></div>
-        <div class="service-body">
-          <div class="service-num">03</div>
-          <h3>Websites &amp; Applications</h3>
-          <p>Business websites, custom web applications, portals, booking systems and digital platforms.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-img"><img src="assets/ai.jpg" alt="Automation & AI"></div>
-        <div class="service-body">
-          <div class="service-num">04</div>
-          <h3>Automation &amp; AI</h3>
-          <p>Business automation, dashboards, workflow automation, AI integration and reporting.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-img"><img src="assets/dm.png" alt="Digital Marketing"></div>
-        <div class="service-body">
-          <div class="service-num">05</div>
-          <h3>Digital Marketing</h3>
-          <p>Social media management, Meta ads, creative content, promotional videos and reels.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-img"><img src="assets/it.png" alt="IT Support & AMC"></div>
-        <div class="service-body">
-          <div class="service-num">06</div>
-          <h3>IT Support &amp; AMC</h3>
-          <p>Ongoing technical support, maintenance, troubleshooting and complete IT management.</p>
-          <div class="service-arrow">→</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY CHOOSE US -->
-<section class="why" id="why">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="kicker">Why Choose Us</p>
-      <h2>One technology partner. Everything connected.</h2>
-      <p class="desc">Instead of managing multiple vendors for different technology requirements, work with one team for infrastructure, security, software, automation and digital growth.</p>
-    </div>
-    <div class="why-grid reveal">
-      <div class="why-card">
-        <div class="why-num">01</div>
-        <h4>Reliable Solutions</h4>
-        <p>Technology designed for stability and long-term use.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">02</div>
-        <h4>One Partner</h4>
-        <p>Infrastructure, software, security and digital solutions under one roof.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">03</div>
-        <h4>Expert Team</h4>
-        <p>Hands-on experience across technology, IT infrastructure and digital solutions.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">04</div>
-        <h4>Fast Support</h4>
-        <p>Responsive technical support when your business needs it.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">05</div>
-        <h4>Built Around You</h4>
-        <p>Solutions designed according to the actual requirements of each client.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="kicker">Our Team</p>
-      <h2>The people behind Genius Tech Solutions.</h2>
-      <p class="desc">A small, hands-on team that personally handles everything from infrastructure to your digital presence.</p>
-    </div>
-    <div class="team-grid reveal-stagger">
-      <div class="team-card">
-        <div class="team-photo"><img src="assets/aditya.jpeg" alt="Aditya Yadav"></div>
-        <div>
-          <h3>Aditya Yadav</h3>
-          <p class="team-role">B.Tech, Computer Science — Poornima University</p>
-          <p class="about">2 years of experience in web technology and IT, specializing in innovative digital and technology solutions.</p>
-          <div class="team-links">
-            <a href="mailto:adityayadav8735@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="https://www.linkedin.com/in/aditya-yadav-649098228?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo"><img src="assets/parv.jpeg" alt="Parv Singhal"></div>
-        <div>
-          <h3>Parv Singhal</h3>
-          <p class="team-role">BBA — Poornima University</p>
-          <p class="about">2 years of experience in digital marketing and finance, specializing in business growth, branding and financial strategy.</p>
-          <div class="team-links">
-            <a href="mailto:parvsinghal13502@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="https://www.linkedin.com/in/parv-singhal-5122a5231?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo"><img src="assets/rajveer.PNG" alt="Rajveer Singh Solanki"></div>
-        <div>
-          <h3>Rajveer Singh Solanki</h3>
-          <p class="team-role">Digital Marketing Manager</p>
-          <p class="about">2 years of hands-on experience in digital marketing, with past work for The Ummed Haveli Hotel Jaipur, Redlines Jaipur and clients in the UAE and Hungary.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="reveal">
-        <p class="kicker" style="color:#3FC5E8;">Let's Talk</p>
-        <h2>Let's build something better.</h2>
-        <p class="desc">Tell us a bit about what you run — we'll get back with a plan built around your business.</p>
-        <div class="contact-info">
-          <a class="info-row" href="mailto:info@geniustechsolutions.in">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div><div class="lbl">Email</div><div class="val">info@geniustechsolutions.in</div></div>
-          </a>
-          <a class="info-row" href="tel:+918426898298">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 006 6l1.5-2L20 14.5V17.5a1.5 1.5 0 01-1.6 1.5A16 16 0 015 6.6 1.5 1.5 0 016.5 5" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-            <div><div class="lbl">Phone</div><div class="val">+91 84268 98298</div></div>
-          </a>
-        </div>
-        <div class="social-row">
-          <a href="https://www.instagram.com/geniustechsolutions?stkn=azh3dnd1MjIxc2Ez" title="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
-          <a href="https://www.linkedin.com/in/genius-tech-solutions-766152436?utm_source=share_via&utm_content=profile&utm_medium=member_ios" title="LinkedIn"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="6.5" y="10" width="2.2" height="7.5" fill="currentColor"/><circle cx="7.6" cy="7" r="1.3" fill="currentColor"/><path d="M11.5 17.5V10h2.1v1.1c.5-.8 1.3-1.3 2.4-1.3 1.8 0 3 1.2 3 3.4v4.3h-2.2v-3.9c0-1-.4-1.7-1.4-1.7-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.7h-2.3z" fill="currentColor"/></svg></a>
-          <a href="https://wa.me/918426898298" title="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 9.2c.2-.6.5-.6.8-.6h.5c.2 0 .4 0 .6.5.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.5-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.2 1.3 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.4.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.2-4.1-.9-3.5-1.4-5.6-4.9-5.8-5.1-.2-.2-1.4-1.8-1.4-3.5s.9-2.5 1.2-2.8z" fill="currentColor"/></svg></a>
-        </div>
-      </div>
-
-      <form class="enquiry reveal" id="enquiryForm">
-        <label for="fname">Your Name</label>
-        <input type="text" id="fname" name="name" required placeholder="Enter your name">
-
-        <label for="fphone">Phone Number</label>
-        <input type="tel" id="fphone" name="phone" required placeholder="10-digit mobile number" pattern="[0-9+ ]{7,15}">
-
-        <label for="custTypeSelect">Customer Type</label>
-        <select id="custTypeSelect" name="customer_type">
-          <option value="">Select customer type</option>
-          <option>School / Coaching Institute</option>
-          <option>Factory / Industry</option>
-          <option>New Business / Startup</option>
-          <option>Office / Business</option>
-          <option>Shop / Retail</option>
-          <option>Home / Residential</option>
-        </select>
-
-        <label for="fmessage">What do you need?</label>
-        <textarea id="fmessage" name="message" rows="3" placeholder="Tell us briefly..."></textarea>
-
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-
-        <button type="submit" id="enquirySubmitBtn">Send Enquiry</button>
-        <div class="form-status" id="formStatus"></div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<a class="wa-float" href="https://wa.me/918426898298" title="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/><path d="M8.5 9.2c.2-.6.5-.6.8-.6h.5c.2 0 .4 0 .6.5.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.5-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.2 1.3 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.4.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.2-4.1-.9-3.5-1.4-5.6-4.9-5.8-5.1-.2-.2-1.4-1.8-1.4-3.5s.9-2.5 1.2-2.8z" fill="#fff"/></svg></a>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-wrap">
-      <div class="footer-brand"><img src="assets/logo.png" alt="Genius Tech Solutions">Genius Tech Solutions</div>
-      <div class="footer-links">
-        <a href="#services">Services</a>
-        <a href="#why">Why Us</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>IT Infrastructure · Security · Software · Automation · Digital Growth</span>
-      <span>© 2026 Genius Tech Solutions</span>
-    </div>
-  </div>
-</footer>
-
-<!-- SERVICE DETAIL POPUP -->
-<div class="svc-overlay" id="svcOverlay" aria-hidden="true">
-  <div class="svc-modal" role="dialog" aria-modal="true" aria-labelledby="svcTitle">
-    <button class="svc-close" id="svcClose" aria-label="Close">×</button>
-    <div class="svc-hero">
-      <img id="svcImg" src="" alt="">
-      <div class="svc-hero-text"><div class="num" id="svcNum"></div><h3 id="svcTitle"></h3></div>
-    </div>
-    <div class="svc-body">
-      <p class="svc-intro" id="svcIntro"></p>
-      <div class="svc-cols">
-        <div><h4>What we offer</h4><ul class="svc-list" id="svcOffer"></ul></div>
-        <div><h4>Why it helps you</h4><ul class="svc-list" id="svcBenefit"></ul></div>
-      </div>
-      <div class="svc-tags" id="svcTags"></div>
-      <div class="svc-actions">
-        <a href="#contact" class="btn-primary" id="svcCta">Get a Free Quote →</a>
-        <a href="https://wa.me/918426898298" target="_blank" rel="noopener" class="btn-ghost">Chat on WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// Sticky nav glass effect on scroll
-const header = document.getElementById('siteHeader');
-function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 24); }
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
+// ---- Contact details (edit here if anything changes) ----
+const C={first:"Aditya",last:"Yadav",org:"Genius Tech Solutions",title:"Managing Director",phone:"+918426898298",email:"adityayadav8735@gmail.com",url:"https://geniustechsolutions.in/"};
+const $=id=>document.getElementById(id);
 
-// Mobile menu
-const navToggle = document.getElementById('navToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-navToggle.addEventListener('click', ()=>{
-  const open = mobileMenu.classList.toggle('open');
-  navToggle.classList.toggle('open', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-mobileMenu.querySelectorAll('a').forEach(a=>{
-  a.addEventListener('click', ()=>{
-    mobileMenu.classList.remove('open');
-    navToggle.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
+function fbPhoto(){$("photo").style.display="none";$("mono").style.display="grid"}
+function fbLogo(){$("logo").style.display="none";$("logoText").style.display="block"}
+$("photo").addEventListener("error",fbPhoto);$("logo").addEventListener("error",fbLogo);
+// catch images that already failed before this script ran
+$("heroBg").addEventListener("error",e=>e.target.remove());
+if($("heroBg").complete&&!$("heroBg").naturalWidth)$("heroBg").remove();
+if($("photo").complete&&!$("photo").naturalWidth)fbPhoto();
+if($("logo").complete&&!$("logo").naturalWidth)fbLogo();
 
-// Scroll reveal
-const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
-  });
-}, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
-revealEls.forEach(el=>io.observe(el));
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2200)}
 
-// Hero elements fade in immediately on load (staggered)
-window.addEventListener('DOMContentLoaded', ()=>{
-  document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('in'), 120 + i*140);
-  });
-});
+function photoB64(){try{const i=$("photo");if(!i.complete||!i.naturalWidth)return"";const s=Math.min(i.naturalWidth,i.naturalHeight),cv=document.createElement("canvas");cv.width=cv.height=256;cv.getContext("2d").drawImage(i,(i.naturalWidth-s)/2,(i.naturalHeight-s)/2,s,s,0,0,256,256);return cv.toDataURL("image/jpeg",.85).split(",")[1]||""}catch(e){return""}}
+function vcard(){const p=photoB64();const l=["BEGIN:VCARD","VERSION:3.0",`N:${C.last};${C.first};;;`,`FN:${C.first} ${C.last}`,`ORG:${C.org}`,`TITLE:${C.title}`,`TEL;TYPE=CELL,VOICE:${C.phone}`,`EMAIL;TYPE=INTERNET,WORK:${C.email}`,`URL:${C.url}`];if(p)l.push(`PHOTO;ENCODING=b;TYPE=JPEG:${p}`);l.push("END:VCARD");return l.join("\r\n")}
 
-// ---------- Service detail popup ----------
-const SERVICES = [
-  { intro:"A strong IT foundation keeps your business running without interruptions. We plan, install and maintain the complete technology backbone of your office, school or factory.",
-    offer:["Structured LAN cabling and network setup","Servers, storage and backup solutions","Business-grade Wi-Fi with full coverage","Firewalls and network security","Hardware supply, installation and upgrades","Ongoing IT support and monitoring"],
-    benefit:["Fewer breakdowns and less downtime","Fast, secure and stable internet for your team","Easy to scale as your business grows","One team accountable for everything"],
-    tags:["Networking","Servers","Wi-Fi","Firewall","Hardware"] },
-  { intro:"Protect your premises around the clock. We design and install complete surveillance and access systems tailored to your building, with clear live and recorded views.",
-    offer:["HD and IP CCTV camera installation","NVR / DVR setup and storage planning","Remote viewing on mobile and PC","Biometric attendance systems","Access control and door security","Maintenance, repair and upgrades"],
-    benefit:["24/7 monitoring of your property","Watch your premises from anywhere","Accurate, tamper-proof attendance records","Deterrent against theft and incidents"],
-    tags:["CCTV","NVR","Biometric","Access Control","Remote View"] },
-  { intro:"We build fast, modern websites and custom applications that turn visitors into customers and simplify how your business operates online.",
-    offer:["Responsive business websites","Custom web applications and portals","Booking and appointment systems","Admin dashboards and CRM tools","Domain, hosting and SSL setup","Ongoing updates and maintenance"],
-    benefit:["A professional online presence","Work is automated instead of manual","Works perfectly on mobile and desktop","Built to grow with your business"],
-    tags:["Websites","Web Apps","Portals","Booking","Hosting"] },
-  { intro:"Save time and reduce errors by letting software handle repetitive work. We connect your tools, build dashboards and bring practical AI into your daily operations.",
-    offer:["Workflow and process automation","Live dashboards and automated reports","AI chatbots and assistants","AI integration into existing systems","WhatsApp and email automation","Data organisation and reporting"],
-    benefit:["Hours saved every week","Fewer manual mistakes","Clear insight into business performance","Faster replies to customers"],
-    tags:["Automation","AI","Dashboards","Chatbots","Reports"] },
-  { intro:"Get noticed and get enquiries. We manage your brand online with creative content and targeted campaigns that reach the right local audience.",
-    offer:["Social media page management","Meta (Facebook and Instagram) ads","Creative posters and content design","Promotional videos and reels","Google Business profile setup","Monthly performance reports"],
-    benefit:["More visibility in your area","Consistent, professional branding","Enquiries you can measure","Content created for you, end to end"],
-    tags:["Social Media","Meta Ads","Reels","Branding","Content"] },
-  { intro:"Keep your systems healthy without hiring a full-time IT team. Our support plans give you a dedicated team on call for maintenance and quick fixes.",
-    offer:["Annual Maintenance Contracts (AMC)","Remote and on-site troubleshooting","Preventive maintenance visits","Software, antivirus and update management","Hardware repair and replacement","Priority response for AMC clients"],
-    benefit:["Predictable yearly IT cost","Problems fixed before they grow","Quick response when you need us","Complete peace of mind"],
-    tags:["AMC","Support","Maintenance","Troubleshooting","On-site"] }
-];
-
-const svcOverlay = document.getElementById('svcOverlay');
-const svcCards = document.querySelectorAll('.service-card');
-let lastFocus = null;
-
-function fillList(id, items){
-  const ul = document.getElementById(id);
-  ul.innerHTML = '';
-  items.forEach((t,i)=>{
-    const li = document.createElement('li');
-    li.textContent = t;
-    li.style.transitionDelay = (0.25 + i*0.07) + 's';
-    ul.appendChild(li);
-  });
-}
-
-function openService(i){
-  const d = SERVICES[i], card = svcCards[i];
-  document.getElementById('svcImg').src = card.querySelector('img').src;
-  document.getElementById('svcImg').alt = card.querySelector('h3').textContent;
-  document.getElementById('svcNum').textContent = card.querySelector('.service-num').textContent;
-  document.getElementById('svcTitle').textContent = card.querySelector('h3').textContent;
-  document.getElementById('svcIntro').textContent = d.intro;
-  fillList('svcOffer', d.offer);
-  fillList('svcBenefit', d.benefit);
-  document.getElementById('svcTags').innerHTML = d.tags.map(t=>'<span>'+t+'</span>').join('');
-  lastFocus = document.activeElement;
-  svcOverlay.querySelector('.svc-modal').scrollTop = 0;
-  svcOverlay.classList.add('open');
-  svcOverlay.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('svcClose').focus();
-}
-function closeService(){
-  svcOverlay.classList.remove('open');
-  svcOverlay.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-  if(lastFocus) lastFocus.focus();
-}
-
-svcCards.forEach((card,i)=>{
-  card.setAttribute('tabindex','0');
-  card.setAttribute('role','button');
-  card.addEventListener('click', ()=>openService(i));
-  card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openService(i); } });
-});
-document.getElementById('svcClose').addEventListener('click', closeService);
-svcOverlay.addEventListener('click', e=>{ if(e.target===svcOverlay) closeService(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && svcOverlay.classList.contains('open')) closeService(); });
-document.getElementById('svcCta').addEventListener('click', closeService);
-
-// Enquiry form -> Google Apps Script Web App (unchanged endpoint/logic)
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzv8f9L6RSpHOkppSvrRbITevHyxOh4c0rv0h4NIDN8mDDrHielVeJ-gEfbi6oMklFTaA/exec";
-const enquiryForm = document.getElementById('enquiryForm');
-const formStatus = document.getElementById('formStatus');
-const submitBtn = document.getElementById('enquirySubmitBtn');
-
-enquiryForm.addEventListener('submit', async function(e){
-  e.preventDefault();
-  formStatus.className = 'form-status';
-  formStatus.textContent = '';
-
-  if(FORM_ENDPOINT.includes('PASTE_YOUR_GOOGLE_APPS_SCRIPT')){
-    formStatus.textContent = 'Form is not connected yet — add your Google Apps Script URL in the code.';
-    formStatus.classList.add('error','show');
-    return;
-  }
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending...';
-
+$("saveBtn").addEventListener("click",()=>{
+  const b=$("saveBtn");
   try{
-    const formData = new FormData(enquiryForm);
-    const response = await fetch(FORM_ENDPOINT, { method: 'POST', body: formData });
-    const data = await response.json().catch(()=>null);
+    const f=new Blob([vcard()],{type:"text/vcard;charset=utf-8"}),u=URL.createObjectURL(f),a=document.createElement("a");
+    a.href=u;a.download="Aditya_Yadav.vcf";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+    b.classList.add("done");$("saveTxt").textContent="Saved ✓";toast("Open the downloaded file to add to Contacts");
+    setTimeout(()=>{b.classList.remove("done");$("saveTxt").textContent="Save Contact"},3000);
+  }catch(e){toast("Could not create the contact file")}
+});
 
-    if(response.ok && data && data.success){
-      formStatus.textContent = "Thanks! Your enquiry has been recorded. We'll get back to you shortly.";
-      formStatus.classList.add('success','show');
-      enquiryForm.reset();
-    } else {
-      const msg = (data && data.message) || 'Something went wrong. Please try again or WhatsApp us directly.';
-      formStatus.textContent = msg;
-      formStatus.classList.add('error','show');
-    }
-  } catch(err){
-    formStatus.textContent = 'Could not send. Please check your connection or WhatsApp us directly.';
-    formStatus.classList.add('error','show');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Send Enquiry';
+$("shareBtn").addEventListener("click",async()=>{
+  const d={title:"Aditya Yadav | Genius Tech Solutions",text:"Aditya Yadav, Managing Director, Genius Tech Solutions",url:location.href};
+  try{
+    if(navigator.share)await navigator.share(d);
+    else{await navigator.clipboard.writeText(location.href);toast("Link copied")}
+  }catch(e){
+    if(e&&e.name==="AbortError")return;
+    try{const t=document.createElement("textarea");t.value=location.href;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();toast("Link copied")}catch(_){toast("Copy the link from the address bar")}
   }
 });
 </script>
